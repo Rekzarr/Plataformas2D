@@ -6,6 +6,7 @@ public class Slime : MonoBehaviour
 {
     [SerializeField] private Transform[] puntosPatrulla;
     [SerializeField] private float velocidad;  
+    [SerializeField] private float dano;
     private Vector3 destinoActual;
     private int indiceActual = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,4 +49,14 @@ public class Slime : MonoBehaviour
             transform.localScale = new Vector3(-1,1,1);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D elOtro){
+        if(elOtro.gameObject.CompareTag("DeteccionPlayer")){
+            Debug.Log("Player detectado");
+        } else if(elOtro.gameObject.CompareTag("PlayerHitBox")){
+            SistemaVidas vidasPlayer = elOtro.gameObject.GetComponent<SistemaVidas>();
+            vidasPlayer.RecibirDano(dano);
+        }
+    }
+
 }
