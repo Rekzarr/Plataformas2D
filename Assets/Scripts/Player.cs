@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 public class Player : MonoBehaviour
 {
+    private float xInicial;
+    private float yInicial;
     private Rigidbody2D rb;
     private float inputH;
     [SerializeField] private TextMeshProUGUI clearText;
@@ -24,6 +26,8 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        xInicial = transform.position.x;
+        yInicial = transform.position.y;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -86,6 +90,10 @@ public class Player : MonoBehaviour
             SistemaVidas vidasEnemigos = item.gameObject.GetComponent<SistemaVidas>();
             vidasEnemigos.RecibirDano(danoAtaque);
         }
+    }
+
+    public void Recolocar(){
+        transform.position = new Vector3(xInicial, yInicial, 0);
     }
 
     private void OnDrawGizmos(){
