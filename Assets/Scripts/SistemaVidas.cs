@@ -7,7 +7,14 @@ public class SistemaVidas : MonoBehaviour
     public void RecibirDano(float danoRecibido){
         vidas -= danoRecibido;
         if(vidas <= 0){
-            Destroy(this.gameObject);
+            if(this.gameObject.CompareTag("PlayerHitBox")){
+                Player player = this.gameObject.GetComponent<Player>();
+                player.Recolocar();
+                vidas = 100;
+            } else {
+                Destroy(this.gameObject);
+            }
+            
         }
     }
 }
